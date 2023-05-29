@@ -1,22 +1,21 @@
-import gd
-import csv
 import asyncio
+import csv
+import gd
 
 client = gd.Client()
 editor = gd.api.Editor()
 level = asyncio.run(client.get_level(91110088))
-asyncio.run(client.login(user=input('Enter your GD username: '), password=input('Enter your password: ')))
+
+username = input('Enter your GD username: ')
+password = input('Enter your account password: ')
+asyncio.run(client.login(user=username, password=password))
 
 with open(input('Enter file name: '), 'r') as csvfile:
     reader = csv.reader(csvfile, delimiter=';')
 
     for row in reader:
-        block_id = int(row[0])
-        x_position = int(row[1])
-        y_position = int(row[2])
-        
-        obj = gd.api.Object(id=block_id)
-        obj.set_pos(x=x_position, y=y_position)
+        obj = gd.api.Object(id=int(row[0]))
+        obj.set_pos(x=int(row[1]), y=int(row[2]))
         editor.add_objects(obj)
 
 level.data = editor.dump()
