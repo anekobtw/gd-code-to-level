@@ -11,7 +11,7 @@ with open(input('Enter file name: '), 'r') as csvfile:
     reader = csv.reader(csvfile, delimiter=';')
 
     for row in reader:
-        block_id = str(row[0])
+        block_id = int(row[0])
         x_position = int(row[1])
         y_position = int(row[2])
         
